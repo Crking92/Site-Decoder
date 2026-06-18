@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Central Texas Native Plant Matchmaker — Prototype</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Central Texas Native Plant Matchmaker</h1>
+      <p class="subtitle">A prototype wizard for Hays County / Central Texas planting decisions. Start with simple site questions, then get ranked native plants and the wildlife relationships they support.</p>
+      <div class="meta"><span id="metaPlants">plant rows</span><span id="metaInteractions">interaction rows</span><span>prototype v0.1</span></div>
+    </div>
+  </header>
+  <main class="grid">
+    <section class="panel wizard">
+      <h2>1. Describe the place</h2>
+      <div class="field">
+        <label for="projectSize">Project size</label>
+        <select id="projectSize">
+          <option value="patio">Patio / small bed</option>
+          <option value="yard" selected>Typical yard</option>
+          <option value="acreage">0.25–5 acres</option>
+          <option value="large_land">Large property / restoration land</option>
+        </select>
+        <p class="help">This does not filter yet. It sets up future recipe language for homeowners vs landowners.</p>
+      </div>
+      <div class="field">
+        <label for="light">Light</label>
+        <select id="light">
+          <option value="unknown">I do not know</option>
+          <option value="full_sun" selected>Full sun — 6+ hours</option>
+          <option value="part_sun">Part sun / part shade</option>
+          <option value="shade">Shade / woodland edge</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="soil">Soil or landform</label>
+        <select id="soil"></select>
+        <p class="help">For version 1, the user chooses this. The included SSURGO summary can later suggest a likely bucket from a map unit.</p>
+      </div>
+      <div class="field">
+        <label for="water">After rain, what happens?</label>
+        <select id="water">
+          <option value="unknown">I do not know</option>
+          <option value="very_dry">Water runs off fast / very dry</option>
+          <option value="dry" selected>Dry most of the time</option>
+          <option value="average">Average garden soil</option>
+          <option value="wet_after_rain">Puddles or stays moist, then dries</option>
+          <option value="wet">Wet ditch / swale / creek edge</option>
+          <option value="irrigated">Regularly irrigated</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Stress</label>
+        <div class="checkbox-grid">
+          <label class="check"><input type="checkbox" name="stress" value="deer"> Deer pressure</label>
+          <label class="check"><input type="checkbox" name="stress" value="mowing"> Occasional mowing</label>
+          <label class="check"><input type="checkbox" name="stress" value="compaction"> Compacted soil</label>
+          <label class="check"><input type="checkbox" name="stress" value="heat"> Pavement / reflected heat</label>
+          <label class="check"><input type="checkbox" name="stress" value="erosion"> Erosion / slope</label>
+          <label class="check"><input type="checkbox" name="stress" value="foot_traffic"> Foot or dog traffic nearby</label>
+          <label class="check"><input type="checkbox" name="stress" value="invasives"> Invasives nearby</label>
+        </div>
+      </div>
+      <h2>2. Choose ecosystem goals</h2>
+      <div class="field checkbox-grid">
+        <label class="check"><input type="checkbox" name="goal" value="bees" checked> Native bees</label>
+        <label class="check"><input type="checkbox" name="goal" value="butterflies_moths" checked> Butterflies & moths</label>
+        <label class="check"><input type="checkbox" name="goal" value="caterpillars"> Caterpillar host plants</label>
+        <label class="check"><input type="checkbox" name="goal" value="birds"> Birds</label>
+        <label class="check"><input type="checkbox" name="goal" value="hummingbirds"> Hummingbirds</label>
+        <label class="check"><input type="checkbox" name="goal" value="mammals"> Mammals</label>
+        <label class="check"><input type="checkbox" name="goal" value="beneficial_insects"> Beneficial insects</label>
+        <label class="check"><input type="checkbox" name="goal" value="erosion"> Erosion control</label>
+        <label class="check"><input type="checkbox" name="goal" value="low_water"> Low water</label>
+        <label class="check"><input type="checkbox" name="goal" value="shade_garden"> Shade garden</label>
+        <label class="check"><input type="checkbox" name="goal" value="meadow"> Pocket prairie / meadow</label>
+        <label class="check"><input type="checkbox" name="goal" value="restoration"> Restoration / public land</label>
+      </div>
+      <div class="field">
+        <label for="height">Plant height</label>
+        <select id="height">
+          <option value="any">Any height</option>
+          <option value="under2">Under 2 ft</option>
+          <option value="two_to_five">2–5 ft</option>
+          <option value="over5">Over 5 ft</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button id="run">Run match</button>
+        <button id="reset" class="secondary">Reset</button>
+      </div>
+    </section>
+    <section class="panel results">
+      <h2>Plant matches</h2>
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search scientific/common name, family, microregion…">
+        <button id="download" class="secondary">Download CSV</button>
+      </div>
+      <div id="resultSummary" class="summary-box"></div>
+      <div id="cards" class="cards"></div>
+    </section>
+  </main>
+  <footer>
+    <p><b>Prototype note:</b> the score is a guide. It combines site fit, selected goals, stress tolerance clues, and uploaded wildlife interaction summaries. It should not be treated as a final planting prescription without field observation.</p>
+  </footer>
+  <script src="data/plant_matcher_data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
